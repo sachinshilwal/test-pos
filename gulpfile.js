@@ -288,6 +288,26 @@ gulp.task('build-database', function() {
         .pipe(gulp.dest('./app/Database'));
 });
 
+// Watch task for development - monitors CSS files for changes and rebuilds automatically
+gulp.task('watch', function() {
+    console.log('👀 Watching for CSS changes...');
+    gulp.watch([
+        './public/css/**/*.css',
+        './node_modules/jquery-ui-dist/jquery-ui.css',
+        './node_modules/bootstrap3-dialog/dist/css/bootstrap-dialog.css',
+        './node_modules/jasny-bootstrap/dist/css/jasny-bootstrap.css',
+        './node_modules/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css',
+        './node_modules/bootstrap-select/dist/css/bootstrap-select.css',
+        './node_modules/bootstrap-table/dist/css/bootstrap-table.css',
+        './node_modules/bootstrap-daterangepicker/daterangepicker.css',
+        './node_modules/chartist/dist/chartist.css',
+        './node_modules/bootstrap-tagsinput-2021/src/bootstrap-tagsinput.css',
+        './node_modules/bootstrap-toggle/css/bootstrap-toggle.css'
+    ], gulp.series('debug-css'));
+    
+    console.log('✨ Watch mode active! Edit your CSS files and changes will be reflected automatically.');
+});
+
 // Run all required tasks
 gulp.task('default',
     gulp.series('clean',

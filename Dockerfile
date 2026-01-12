@@ -6,6 +6,9 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli bcmath intl gd
 RUN echo "date.timezone = \"\${PHP_TIMEZONE}\"" > /usr/local/etc/php/conf.d/timezone.ini
 
+# Enable .htaccess support
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
 WORKDIR /app
 COPY . /app
 RUN ln -s /app/*[^public] /var/www && rm -rf /var/www/html && ln -nsf /app/public /var/www/html

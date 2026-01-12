@@ -1,58 +1,120 @@
+/* 80mm thermal printer optimized receipt */
+/* 80mm = ~302px at 96 DPI */
+@media print {
+    @page {
+        size: 80mm auto;
+        margin: 0;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 #receipt_wrapper {
-    width: 100%;
+    width: 302px;
+    max-width: 302px;
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
 }
 
 #receipt_header {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 #company_name {
-    font-size: 150%;
+    font-size: 16px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 #company_name img {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 120px;
+    max-height: 80px;
+    margin-bottom: 5px;
+}
+
+#company_address,
+#company_phone {
+    font-size: 10px;
+    margin-bottom: 3px;
 }
 
 #company_phone {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
 
+#sale_receipt {
+    font-weight: bold;
+    font-size: 12px;
+    margin: 8px 0 3px 0;
 }
 
 #sale_time {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 10px;
+}
+
+#receipt_general_info {
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+#receipt_general_info div {
+    margin-bottom: 2px;
 }
 
 #receipt_items {
-    position: relative;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%;
+    font-size: 10px;
+}
+
+#receipt_items th {
+    border-top: 1px dashed #000;
+    border-bottom: 1px dashed #000;
+    padding: 4px 2px;
+    font-weight: bold;
+    text-align: left;
 }
 
 #receipt_items td {
-    position: relative;
-    padding: 3px;
-    margin-bottom: 5px;
-
+    padding: 3px 2px;
+    vertical-align: top;
 }
 
 #receipt_items tr {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+}
+
+#receipt_items th:last-child,
+#receipt_items td:last-child {
+    text-align: right;
 }
 
 #sale_return_policy {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 10px 0;
     text-align: center;
+    font-size: 9px;
+    padding: 5px 0;
+    border-top: 1px dashed #000;
+    border-bottom: 1px dashed #000;
 }
 
 #receipt_wrapper #barcode {
     margin-top: 10px;
     text-align: center;
+}
+
+#receipt_wrapper #barcode img {
+    max-width: 250px;
 }
 
 .total-value {
@@ -61,4 +123,28 @@
 
 .discount {
     font-weight: bold;
+    font-style: italic;
+}
+
+/* Ensure proper spacing for totals */
+#receipt_items tr td[colspan="3"] {
+    font-weight: bold;
+}
+
+/* Print-specific optimizations */
+@media print {
+    #receipt_wrapper {
+        width: 302px;
+        max-width: 302px;
+    }
+    
+    /* Hide page numbers and headers/footers */
+    @page {
+        margin: 0;
+    }
+    
+    /* Ensure text doesn't break awkwardly */
+    #receipt_items td {
+        word-wrap: break-word;
+    }
 }
